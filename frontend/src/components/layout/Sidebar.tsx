@@ -1,15 +1,18 @@
 "use client";
 import React, { useState } from 'react';
-import { FiHome, FiBell, FiCheckSquare, FiBriefcase, FiBarChart2, FiGrid, FiUsers, FiSettings, FiHelpCircle } from 'react-icons/fi';
+import { FiHome, FiBell, FiCheckSquare, FiBriefcase, FiBarChart2, FiGrid, FiUsers, FiSettings, FiHelpCircle, FiBook } from 'react-icons/fi';
+import Link from "next/link";
+import { ROUTES } from "../../router/routes";
 
 const mainItems = [
-  { label: 'Dashboard', icon: FiHome, section: 'Main Menu' },
-  { label: 'Notifications', icon: FiBell, section: 'Main Menu' },
-  { label: 'Tasks', icon: FiCheckSquare, section: 'Main Menu' },
-  { label: 'Deals', icon: FiBriefcase, section: 'Main Menu' },
-  { label: 'Analytics', icon: FiBarChart2, section: 'Records' },
-  { label: 'Companies', icon: FiGrid, section: 'Records' },
-  { label: 'Contacts', icon: FiUsers, section: 'Records' },
+  { label: 'Dashboard', icon: FiHome, section: 'Main Menu', href: ROUTES.DASHBOARD },
+  { label: 'Notifications', icon: FiBell, section: 'Main Menu', href: ROUTES.NOTIFICATIONS },
+  { label: 'Tasks', icon: FiCheckSquare, section: 'Main Menu', href: ROUTES.TASKS },
+  { label: 'Deals', icon: FiBriefcase, section: 'Main Menu', href: ROUTES.DEALS },
+  { label: 'Analytics', icon: FiBarChart2, section: 'Records', href: ROUTES.ANALYTICS },
+  { label: 'Companies', icon: FiGrid, section: 'Records', href: ROUTES.COMPANIES },
+  { label: 'Contacts', icon: FiUsers, section: 'Records', href: ROUTES.CONTACTS },
+  { label: 'Epub Reader', icon: FiBook, section: 'Records', href: ROUTES.EPUB_READER },
 ];
 const bottom = [
   { label: 'Settings', icon: <FiSettings size={20} color="#5F6D7E" /> },
@@ -46,13 +49,14 @@ export default function Sidebar() {
               const iconColor = isActive ? '#6C63FF' : '#5F6D7E';
               return (
                 <li key={item.label}>
-                  <button
+                  <Link
+                    href={item.href}
                     className={`w-full text-left flex items-center gap-3 px-3 py-2 rounded-lg font-medium ${btnStyle}`}
                     onClick={() => setActiveItem(item.label)}
                   >
                     <Icon size={20} color={iconColor} />
                     {item.label}
-                  </button>
+                  </Link>
                 </li>
               );
             })}
