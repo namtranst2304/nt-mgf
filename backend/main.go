@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -25,5 +26,7 @@ func main() {
 		return c.SendString("Connected to PostgreSQL!")
 	})
 
-	app.Listen(":3001")
+	if err := app.Listen(":3001"); err != nil {
+		log.Fatalf("failed to start server: %v", err)
+	}
 }
